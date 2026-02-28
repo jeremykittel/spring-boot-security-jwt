@@ -1,34 +1,89 @@
-# Spring Boot 4.0 Security with JWT Implementation
-This project demonstrates the implementation of security using Spring Boot 4.0 and JSON Web Tokens (JWT). It includes the following features:
+# Spring Boot Security (JWT + Keycloak)
 
-## Features
-* User registration and login with JWT authentication
-* Password encryption using BCrypt
-* Role-based authorization with Spring Security
-* Customized access denied handling
-* Logout mechanism
-* Refresh token
+Demo Spring Boot app showing two authentication modes:
 
-## Technologies
-* Spring Boot 4.0
-* Spring Security
-* JSON Web Tokens (JWT)
-* BCrypt
-* Maven
- 
-## Getting Started
-To get started with this project, you will need to have the following installed on your local machine:
+- **Custom JWT mode**: register/login issues JWT + refresh token.
+- **Keycloak mode**: login via **OAuth2/OIDC** (Keycloak), with role mapping.
 
-* JDK 17+
-* Maven 3+
+## What the app currently offers
 
+### Security
+- User registration and authentication (custom JWT mode)
+- Access token + refresh token flow
+- Logout / token invalidation (token repository)
+- Role-based authorization (controllers for demo/admin/management)
+- Optional Keycloak integration:
+    - OAuth2 Login (browser redirect / session)
+    - Role mapping from Keycloak token claims to Spring Security authorities
 
-To build and run the project, follow these steps:
+### API / Modules
+- Auth endpoints under `/api/v1/auth/**` (JWT mode)
+- Example domain endpoints (e.g., books, demo/admin/management)
+- OpenAPI/Swagger UI enabled (see endpoints below)
 
-* Clone the repository: `git clone https://github.com/jeremykittel/spring-boot-security-jwt.git`
-* Navigate to the project directory: cd spring-boot-security-jwt
-* Add database "jwt_security" to postgres 
-* Build the project: mvn clean install
-* Run the project: mvn spring-boot:run 
+### Persistence / Auditing
+- PostgreSQL backing store
+- Spring Data JPA auditing enabled (created/modified auditing)
 
--> The application will be available at http://localhost:8080.
+## Tech stack
+- Java 17
+- Spring Boot 4.x
+- Spring Security
+- Spring Data JPA (PostgreSQL)
+- Maven
+- Docker Compose (Postgres, Keycloak, nginx, pgAdmin, MailDev)
+
+## Running with Docker (recommended)
+
+1) Create/update `.env` at the project root (used by Docker Compose).
+2) Start infra:
+   ```bash
+   docker compose up -d
+   ```
+3) Run the Spring Boot app (locally via IntelliJ or Maven).
+
+### Services started by Docker Compose
+- **PostgreSQL (app DB)**: `localhost:5432`
+- **Keycloak PostgreSQL (Keycloak DB)**: `localhost:5433`
+- **Keycloak** (behind nginx): `http://app.local/auth`
+- **pgAdmin**: `http://localhost:5050`
+- **MailDev**: `http://localhost:1080`
+
+> Note: `app.local` is provided as a Docker network alias for nginx.  
+> If you’re calling it from your host machine, you may need to add to your hosts file:
+> `127.0.0.1 app.local`
+
+## Running the application
+
+### JWT mode (default)
+- Ensure your Spring profile/config sets:
+    - `security.auth-mode=custom-jwt`
+
+Run:
+```bash
+./mvnw spring-boot:run
+```
+
+### Keycloak mode
+- Switch auth mode to Keycloak:
+    - `security.auth-mode=keycloak`
+- Ensure your Keycloak/OIDC settings (client id/issuer/redirect) are configured for your environment.
+
+Run:
+```bash
+./mvnw spring-boot:run
+```
+
+## API docs (OpenAPI / Swagger)
+Once the app is running, open Swagger UI (path depends on Springdoc config). Common defaults:
+- `/swagger-ui.html`
+- `/swagger-ui/index.html`
+
+## Development notes
+- Docker Compose `.env` is for containers; the Spring Boot app reads **environment variables** or `application*.yml` properties.
+- If you want `application.yml` to use env vars, use placeholders like `${POSTGRES_DB:app_db}`.
+
+## Build
+```bash
+./mvnw clean verify
+```
