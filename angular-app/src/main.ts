@@ -4,11 +4,8 @@ import { App } from './app/app';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/auth/auth.interceptor';
-import { initKeycloak } from './app/auth/keycloak.service';
 
 (async () => {
-  await initKeycloak();
-
   await bootstrapApplication(App, {
     ...appConfig,
     providers: [
