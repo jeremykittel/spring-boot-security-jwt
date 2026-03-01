@@ -31,8 +31,12 @@ public class KeycloakJwtRoleMappingConfig {
       JwtGrantedAuthoritiesConverter scopes = new JwtGrantedAuthoritiesConverter();
       Set<GrantedAuthority> authorities = new HashSet<>(scopes.convert(jwt));
 
-      readClientRoles(jwt.getClaims(), clientId)
-          .forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role)));
+      readClientRoles(jwt.getClaims(), clientId).forEach(role -> {
+        // Keep ROLE_ authorities for hasRole/hasAnyRole checks
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        // Also add a raw role for hasAuthority('admin:read') style permission checks
+        authorities.add(new SimpleGrantedAuthority(role));
+      });
 
       return authorities;
     };
