@@ -63,7 +63,7 @@ services:
       KC_HOSTNAME_URL: http://app.local/auth
       KC_HOSTNAME_ADMIN_URL: http://app.local/auth
     volumes:
-      - ./ops/keycloak/import/ninjasmoke-realm.json:/opt/keycloak/data/import/ninjasmoke-realm.json:ro
+      - ./ops/keycloak/import:/opt/keycloak/data/import:ro
     networks:
       - ninjasmoke
     restart: unless-stopped

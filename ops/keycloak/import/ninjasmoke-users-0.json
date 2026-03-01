@@ -1,0 +1,30 @@
+{
+  "realm" : "ninjasmoke",
+  "users" : [ {
+    "id" : "fb199d23-9826-41fd-a8be-682b4e42be13",
+    "username" : "jeremy",
+    "firstName" : "Jeremy",
+    "lastName" : "Kittel",
+    "email" : "jeremy.kittel@gmail.com",
+    "emailVerified" : true,
+    "createdTimestamp" : 1772305005154,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "9345cf3f-cfe2-46b1-ab96-2e92eaee8cde",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1772305021935,
+      "secretData" : "{\"value\":\"4w1VZWL5pb7OOq20ScsLJOquYHFnx39tXF13RmwakNLoKSo2nrMOqzBSmg33MNoPl15GAfLClVZ8FmqipUOdzA==\",\"salt\":\"RrFyo+UcPJ/M5ubk+C5INw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-ninjasmoke" ],
+    "clientRoles" : {
+      "spring-app" : [ "ADMIN" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

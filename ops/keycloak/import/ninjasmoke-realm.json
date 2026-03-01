@@ -245,6 +245,7 @@
         "containerId" : "87b81cf4-b62d-4c8c-a6be-cf8758be490f",
         "attributes" : { }
       } ],
+      "angular-spa" : [ ],
       "security-admin-console" : [ ],
       "spring-app" : [ {
         "id" : "c2a08955-b441-40ab-9761-3df74cacca44",
@@ -474,33 +475,6 @@
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister" : false,
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
-  "users" : [ {
-    "id" : "fb199d23-9826-41fd-a8be-682b4e42be13",
-    "username" : "jeremy",
-    "firstName" : "Jeremy",
-    "lastName" : "Kittel",
-    "email" : "jeremy.kittel@gmail.com",
-    "emailVerified" : true,
-    "createdTimestamp" : 1772305005154,
-    "enabled" : true,
-    "totp" : false,
-    "credentials" : [ {
-      "id" : "9345cf3f-cfe2-46b1-ab96-2e92eaee8cde",
-      "type" : "password",
-      "userLabel" : "My password",
-      "createdDate" : 1772305021935,
-      "secretData" : "{\"value\":\"4w1VZWL5pb7OOq20ScsLJOquYHFnx39tXF13RmwakNLoKSo2nrMOqzBSmg33MNoPl15GAfLClVZ8FmqipUOdzA==\",\"salt\":\"RrFyo+UcPJ/M5ubk+C5INw==\",\"additionalParameters\":{}}",
-      "credentialData" : "{\"hashIterations\":210000,\"algorithm\":\"pbkdf2-sha512\",\"additionalParameters\":{}}"
-    } ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-ninjasmoke" ],
-    "clientRoles" : {
-      "spring-app" : [ "ADMIN" ]
-    },
-    "notBefore" : 0,
-    "groups" : [ ]
-  } ],
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
     "roles" : [ "offline_access" ]
@@ -606,6 +580,50 @@
     "authenticationFlowBindingOverrides" : { },
     "fullScopeAllowed" : false,
     "nodeReRegistrationTimeout" : 0,
+    "defaultClientScopes" : [ "web-origins", "acr", "profile", "roles", "email" ],
+    "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
+  }, {
+    "id" : "cc04810b-50f9-49d8-bdc0-22db0264de88",
+    "clientId" : "angular-spa",
+    "name" : "angular-spa",
+    "description" : "",
+    "rootUrl" : "",
+    "adminUrl" : "",
+    "baseUrl" : "",
+    "surrogateAuthRequired" : false,
+    "enabled" : true,
+    "alwaysDisplayInConsole" : false,
+    "clientAuthenticatorType" : "client-secret",
+    "redirectUris" : [ "https://app.local:4200/*", "http://localhost:4200/*" ],
+    "webOrigins" : [ "https://app.local:4200", "http://localhost:4200" ],
+    "notBefore" : 0,
+    "bearerOnly" : false,
+    "consentRequired" : false,
+    "standardFlowEnabled" : true,
+    "implicitFlowEnabled" : false,
+    "directAccessGrantsEnabled" : false,
+    "serviceAccountsEnabled" : false,
+    "publicClient" : true,
+    "frontchannelLogout" : true,
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "oauth2.device.authorization.grant.enabled" : "false",
+      "backchannel.logout.revoke.offline.tokens" : "false",
+      "use.refresh.tokens" : "true",
+      "oidc.ciba.grant.enabled" : "false",
+      "client.use.lightweight.access.token.enabled" : "false",
+      "backchannel.logout.session.required" : "true",
+      "client_credentials.use_refresh_token" : "false",
+      "acr.loa.map" : "{}",
+      "require.pushed.authorization.requests" : "false",
+      "tls.client.certificate.bound.access.tokens" : "false",
+      "display.on.consent.screen" : "false",
+      "pkce.code.challenge.method" : "S256",
+      "token.response.type.bearer.lower-case" : "false"
+    },
+    "authenticationFlowBindingOverrides" : { },
+    "fullScopeAllowed" : true,
+    "nodeReRegistrationTimeout" : -1,
     "defaultClientScopes" : [ "web-origins", "acr", "profile", "roles", "email" ],
     "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
   }, {
