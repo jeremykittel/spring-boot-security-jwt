@@ -64,6 +64,7 @@ services:
       KC_HOSTNAME_ADMIN_URL: http://app.local/auth
     volumes:
       - ./ops/keycloak/import:/opt/keycloak/data/import:ro
+      - ./ops/keycloak/themes:/opt/keycloak/providers/
     networks:
       - ninjasmoke
     restart: unless-stopped
