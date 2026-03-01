@@ -31,6 +31,8 @@ Demo Spring Boot app showing two authentication modes:
 - Spring Security
 - Spring Data JPA (PostgreSQL)
 - Maven
+- **Angular (frontend)**
+- Node.js + npm (frontend tooling)
 - Docker Compose (Postgres, Keycloak, nginx, pgAdmin, MailDev)
 
 ## Running with Docker (recommended)
@@ -55,7 +57,9 @@ Demo Spring Boot app showing two authentication modes:
 
 ## Running the application
 
-### JWT mode (default)
+### Backend (Spring Boot)
+
+#### JWT mode (default)
 - Ensure your Spring profile/config sets:
     - `security.auth-mode=custom-jwt`
 
@@ -64,7 +68,7 @@ Run:
 ./mvnw spring-boot:run
 ```
 
-### Keycloak mode
+#### Keycloak mode
 - Switch auth mode to Keycloak:
     - `security.auth-mode=keycloak`
 - Ensure your Keycloak/OIDC settings (client id/issuer/redirect) are configured for your environment.
@@ -72,6 +76,32 @@ Run:
 Run:
 ```bash
 ./mvnw spring-boot:run
+```
+
+### Frontend (Angular)
+
+The Angular app lives in `./angular-app`.
+
+1) Install dependencies:
+   ```bash
+   cd angular-app
+   npm ci
+   ```
+2) Start the dev server:
+   ```bash
+   npm start
+   ```
+3) Open the app (typically):
+    - `http://localhost:4200`
+
+> If the frontend calls the backend API, configure either:
+> - an Angular dev-server **proxy** (recommended for local dev), or
+> - the backend base URL via Angular environment configuration.
+
+Build:
+```bash
+cd angular-app
+npm run build
 ```
 
 ## API docs (OpenAPI / Swagger)
