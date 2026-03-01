@@ -62,12 +62,15 @@ services:
       KC_HTTP_RELATIVE_PATH: /auth
       KC_HOSTNAME_URL: http://app.local/auth
       KC_HOSTNAME_ADMIN_URL: http://app.local/auth
+    volumes:
+      - ./ops/keycloak/import/ninjasmoke-realm.json:/opt/keycloak/data/import/ninjasmoke-realm.json:ro
     networks:
       - ninjasmoke
     restart: unless-stopped
     command:
       - "start"
       - "--http-port=8080"
+      - "--import-realm"
 
   nginx:
     container_name: nginx

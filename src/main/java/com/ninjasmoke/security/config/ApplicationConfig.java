@@ -3,6 +3,7 @@ package com.ninjasmoke.security.config;
 import com.ninjasmoke.security.auditing.ApplicationAuditAware;
 import com.ninjasmoke.security.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -34,6 +35,18 @@ public class ApplicationConfig {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService());
     authProvider.setPasswordEncoder(passwordEncoder());
     return authProvider;
+  }
+
+  /**
+   * Prevent JwtAuthenticationFilter (@Component) from being auto-registered as a global servlet filter.
+   * It should only run when explicitly added to the custom-jwt SecurityFilterChain.
+   */
+  @Bean
+  public FilterRegistrationBean<JwtAuthenticationFilter> jwtAuthenticationFilterRegistration(
+          JwtAuthenticationFilter filter) {
+    FilterRegistrationBean<JwtAuthenticationFilter> registration = new FilterRegistrationBean<>(filter);
+    registration.setEnabled(false);
+    return registration;
   }
 
   @Bean
